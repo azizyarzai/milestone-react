@@ -11,7 +11,7 @@ const Counter = (props) => {
   };
   return (
     <div>
-      <div>{counter}</div>
+      <div className="test">{counter}</div>
       <div>
         <button onClick={increment}>Increment</button>
         <button onClick={decrement}>Decrement</button>

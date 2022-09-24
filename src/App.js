@@ -1,4 +1,3 @@
-import "./App.css";
 import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Counter from "./components/Counter";
@@ -6,6 +5,7 @@ import ToDo from "./components/ToDo";
 
 function App() {
   let [test, setTest] = useState(12);
+  const [show, setShow] = useState(false);
 
   useEffect(() => {
     setTest(15);
@@ -24,6 +24,10 @@ function App() {
       <Counter say_hi={say_hi} no={3} />
       <hr />
       <ToDo />
+      {/* {show ? <p className="test">TEst data</p> : null} */}
+      {show && <p className="test">TEst data</p>}
+      <button onClick={() => setShow(!show)}>Toggle</button>
+      {/* <p>Commented</p> */}
     </div>
   );
 }
