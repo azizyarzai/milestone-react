@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Counter from "./components/Counter";
 import ToDo from "./components/ToDo";
 import "./App.css"
+import TodoClass from "./components/ToDoClass";
 
 function App() {
   let [test, setTest] = useState(12);
@@ -25,6 +26,8 @@ function App() {
       <Counter say_hi={say_hi} no={3} />
       <hr />
       <ToDo />
+      <hr />
+      <TodoClass />
       {/* {show ? <p className="test">TEst data</p> : null} */}
       {show && <p className="test">TEst data</p>}
       <button onClick={() => setShow(!show)}>Toggle</button>
