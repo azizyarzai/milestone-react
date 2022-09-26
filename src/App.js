@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Counter from "./components/Counter";
 import ToDo from "./components/ToDo";
+import "./App.css"
 
 function App() {
   let [test, setTest] = useState(12);
@@ -27,7 +28,7 @@ function App() {
       {/* {show ? <p className="test">TEst data</p> : null} */}
       {show && <p className="test">TEst data</p>}
       <button onClick={() => setShow(!show)}>Toggle</button>
-      {/* <p>Commented</p> */}
+      <p className="active">Active from todo</p>
     </div>
   );
 }

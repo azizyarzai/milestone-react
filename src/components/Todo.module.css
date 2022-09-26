@@ -1,0 +1,9 @@
+.active {
+    font-size: 2rem;
+    color: aqua;
+}
+
+.noneActive {
+    font-size: 3rem;
+    color: brown;
+}
