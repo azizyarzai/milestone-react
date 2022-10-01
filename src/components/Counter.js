@@ -4,7 +4,7 @@ const Counter = (props) => {
   const [counter, setCounter] = useState(1);
   const increment = () => setCounter(counter + 1);
   const decrement = () => setCounter(counter - 1);
-  console.log(12);
+  // console.log(12);
 
   const new_func = () => {
     props.say_hi(props.no);

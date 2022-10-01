@@ -9,15 +9,15 @@ function App() {
   let [test, setTest] = useState(12);
   const [show, setShow] = useState(false);
 
-  useEffect(() => {
-    setTest(15);
-    console.log(test);
-    console.log("useEffect");
-  });
+  // useEffect(() => {
+  //   setTest(15);
+  //   console.log(test);
+  //   console.log("useEffect");
+  // });
   const say_hi = (val) => {
     console.log(`Called from ${val} counter`);
   };
-  console.log(test);
+  // console.log(test);
   return (
     <div style={{ marginLeft: "5rem" }}>
       <p>{test}</p>
@@ -27,7 +27,7 @@ function App() {
       <hr />
       <ToDo />
       <hr />
-      <TodoClass />
+      <TodoClass test={10}>new child</TodoClass>
       {/* {show ? <p className="test">TEst data</p> : null} */}
       {show && <p className="test">TEst data</p>}
       <button onClick={() => setShow(!show)}>Toggle</button>
