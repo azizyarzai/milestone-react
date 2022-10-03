@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from './Todo.module.css'
 const ToDo = () => {
   const [input, setInput] = useState("");
+  const [input2, setInput2] = useState("");
   const [todos, setTodos] = useState([]);
   const add = () => {
     setTodos([
@@ -21,6 +22,17 @@ const ToDo = () => {
     _dos[index].stricke = true;
     setTodos(_dos);
   };
+
+  useEffect(() => {
+    // setInput("This")
+    console.log("useEffectCalled. ");
+
+    return () => {
+      console.log("component unmounted.");
+    }
+  }, [input])
+
+
 
  
   return (
@@ -49,6 +61,11 @@ const ToDo = () => {
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
+        />
+        <input
+          type="text"
+          value={input2}
+          onChange={(e) => setInput2(e.target.value)}
         />
         <button onClick={add}>Add</button>
       </div>

@@ -61,6 +61,17 @@ class TodoClass extends Component {
     return false;
   }
 
+  // componentWillUnmount
+
+  getSnapshotBeforeUpdate(prevProps, prevState){
+    console.log("getSnapshotBeforeUpdate called");
+    return 5
+  }
+
+  componentDidUpdate(prevProps, prevState,value){
+    console.log(`componentDidUpdate claaed with ${value}`);
+  }
+
   render() {
     // console.log(this.props)
     return (

@@ -4,10 +4,14 @@ import Counter from "./components/Counter";
 import ToDo from "./components/ToDo";
 import "./App.css"
 import TodoClass from "./components/ToDoClass";
+import Sample from "./components/Sample";
 
 function App() {
   let [test, setTest] = useState(12);
   const [show, setShow] = useState(false);
+  const [todoShow, setTodoShow] = useState(true);
+  const[value, setValue] = useState(15)
+
 
   // useEffect(() => {
   //   setTest(15);
@@ -17,17 +21,23 @@ function App() {
   const say_hi = (val) => {
     console.log(`Called from ${val} counter`);
   };
-  // console.log(test);
+  console.log("App js rendered");
   return (
     <div style={{ marginLeft: "5rem" }}>
+      <Sample value={value}/>
+      <button onClick={() => {
+// setValue(value + 15)
+setShow(!show)
+      } }>Change Value</button>
       <p>{test}</p>
       <Counter say_hi={say_hi} no={1} />
       <Counter say_hi={say_hi} no={2} />
       <Counter say_hi={say_hi} no={3} />
       <hr />
-      <ToDo />
+      {todoShow && <ToDo />}
+      <button onClick={() => setTodoShow(!todoShow)}>Toggle</button>
       <hr />
-      <TodoClass test={10}>new child</TodoClass>
+      {/* <TodoClass test={10}>new child</TodoClass> */}
       {/* {show ? <p className="test">TEst data</p> : null} */}
       {show && <p className="test">TEst data</p>}
       <button onClick={() => setShow(!show)}>Toggle</button>
