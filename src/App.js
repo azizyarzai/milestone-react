@@ -37,7 +37,7 @@ setShow(!show)
       {todoShow && <ToDo />}
       <button onClick={() => setTodoShow(!todoShow)}>Toggle</button>
       <hr />
-      {/* <TodoClass test={10}>new child</TodoClass> */}
+      <TodoClass test={10}>new child</TodoClass>
       {/* {show ? <p className="test">TEst data</p> : null} */}
       {show && <p className="test">TEst data</p>}
       <button onClick={() => setShow(!show)}>Toggle</button>

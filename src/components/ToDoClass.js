@@ -1,6 +1,7 @@
-import React, { Component } from "react";
+import React, { Component, PureComponent } from "react";
+import withDate from "../hoc/withDate";
 
-class TodoClass extends Component {
+class TodoClass extends PureComponent {
   constructor() {
     super();
     this.state = {
@@ -54,12 +55,12 @@ class TodoClass extends Component {
       .then((data) => this.setState({ ...this.state, users: data }));
   }
 
-  shouldComponentUpdate(nextProps, nextSate) {
-    if (nextSate.users.length !== 0 && nextSate.input.length === 0) {
-      return true;
-    }
-    return false;
-  }
+  // shouldComponentUpdate(nextProps, nextSate) {
+  //   if (nextSate.users.length !== 0 && nextSate.input.length === 0) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   // componentWillUnmount
 
@@ -124,4 +125,4 @@ class TodoClass extends Component {
   }
 }
 
-export default TodoClass;
+export default withDate(TodoClass);

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import withDate from "../hoc/withDate";
 
 const Counter = (props) => {
   const [counter, setCounter] = useState(1);
@@ -21,4 +22,4 @@ const Counter = (props) => {
   );
 };
 
-export default Counter;
+export default withDate(Counter);

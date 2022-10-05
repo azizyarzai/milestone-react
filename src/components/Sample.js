@@ -1,10 +1,16 @@
-import React from 'react'
+import React, {Fragment} from 'react'
+import withDate from '../hoc/withDate';
+import MyFragment from './MyFragment';
 
 const Sample = ({value}) => {
 console.log("Sample rendered");
   return (
-    <div>Sample - {value}</div>
+    <MyFragment>
+      <div>Sample - {value}</div>
+      <p>Hi</p>
+      </MyFragment>
+    
   )
 }
 
-export default React.memo(Sample)
+export default withDate(React.memo(Sample))
