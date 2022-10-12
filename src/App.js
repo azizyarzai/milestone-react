@@ -2,16 +2,16 @@ import React, { useEffect, useState } from "react";
 import Header from "./components/Header";
 import Counter from "./components/Counter";
 import ToDo from "./components/ToDo";
-import "./App.css"
+import "./App.css";
 import TodoClass from "./components/ToDoClass";
 import Sample from "./components/Sample";
+import PropType from "./components/PropType";
 
 function App() {
   let [test, setTest] = useState(12);
   const [show, setShow] = useState(false);
   const [todoShow, setTodoShow] = useState(true);
-  const[value, setValue] = useState(15)
-
+  const [value, setValue] = useState(15);
 
   // useEffect(() => {
   //   setTest(15);
@@ -24,11 +24,17 @@ function App() {
   console.log("App js rendered");
   return (
     <div style={{ marginLeft: "5rem" }}>
-      <Sample value={value}/>
-      <button onClick={() => {
-// setValue(value + 15)
-setShow(!show)
-      } }>Change Value</button>
+      <PropType title="Test title" onClick={() => alert("Clicked")} />
+      <Sample value={value} />
+      <button
+        onClick={() => {
+          // setValue(value + 15)
+          setShow(!show);
+        }}
+        on
+      >
+        Change Value
+      </button>
       <p>{test}</p>
       <Counter say_hi={say_hi} no={1} />
       <Counter say_hi={say_hi} no={2} />

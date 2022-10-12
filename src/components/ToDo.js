@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import classes from './Todo.module.css'
+import classes from "./Todo.module.css";
 const ToDo = () => {
   const [input, setInput] = useState("");
   const [input2, setInput2] = useState("");
@@ -29,12 +29,9 @@ const ToDo = () => {
 
     return () => {
       console.log("component unmounted.");
-    }
-  }, [input])
+    };
+  }, [input]);
 
-
-
- 
   return (
     <div>
       <h1>To Do List</h1>
@@ -51,7 +48,9 @@ const ToDo = () => {
             >
               {todo.id} - {todo.input}
             </div>
-            <button style={{color: "green", }} onClick={() => del(todo.id)}>Delete</button>
+            <button style={{ color: "green" }} onClick={() => del(todo.id)}>
+              Delete
+            </button>
             <button onClick={() => done(todo.id)}>Done</button>
           </li>
         ))}
@@ -60,13 +59,13 @@ const ToDo = () => {
         <input
           type="text"
           value={input}
-          onChange={(e) => setInput(e.target.value)}
+          onChange={(e) => setInput(e.targets.value)}
         />
-        <input
+        {/* <inputss
           type="text"
           value={input2}
           onChange={(e) => setInput2(e.target.value)}
-        />
+        /> */}
         <button onClick={add}>Add</button>
       </div>
     </div>
