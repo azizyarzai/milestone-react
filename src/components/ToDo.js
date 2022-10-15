@@ -9,6 +9,8 @@ const ToDo = () => {
       ...todos,
       { id: Math.ceil(Math.random() * 1000), input, stricke: false },
     ]);
+
+    let number = Math.ceil(Math.random() * 1000)
     setInput("");
   };
 
@@ -59,7 +61,7 @@ const ToDo = () => {
         <input
           type="text"
           value={input}
-          onChange={(e) => setInput(e.targets.value)}
+          onChange={(e) => setInput(e.target.value)}
         />
         {/* <inputss
           type="text"

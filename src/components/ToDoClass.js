@@ -50,9 +50,20 @@ class TodoClass extends PureComponent {
   }
 
   componentDidMount() {
-    fetch("https://api.github.com/users")
+    fetch("https://api.githu.com/users")
       .then((res) => res.json())
-      .then((data) => this.setState({ ...this.state, users: data }));
+      .then((data) => this.setState({ ...this.state, users: data }))
+    
+    // const no = Math.ceil(Math.random() * 1000)
+    // if (no > 100){
+    //   throw new Error("dsfjsh")
+    // }
+
+    const arr = [1,2]
+
+    const b = arr[20]
+
+    console.log("B", b);
   }
 
   // shouldComponentUpdate(nextProps, nextSate) {

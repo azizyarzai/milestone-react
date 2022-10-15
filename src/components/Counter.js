@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import withDate from "../hoc/withDate";
 
 const Counter = (props) => {
@@ -10,6 +10,12 @@ const Counter = (props) => {
   const new_func = () => {
     props.say_hi(props.no);
   };
+
+  useEffect(() => {
+    if (counter === 5){
+      throw new Error("Error occured")
+    }
+  }, [counter])
   return (
     <div>
       <div className="test">{counter}</div>
@@ -22,4 +28,4 @@ const Counter = (props) => {
   );
 };
 
-export default withDate(Counter);
+export default Counter;

@@ -6,6 +6,7 @@ import "./App.css";
 import TodoClass from "./components/ToDoClass";
 import Sample from "./components/Sample";
 import PropType from "./components/PropType";
+import ErrorBoundary from "./components/ErrorBoundary";
 
 function App() {
   let [test, setTest] = useState(12);
@@ -36,14 +37,14 @@ function App() {
         Change Value
       </button>
       <p>{test}</p>
-      <Counter say_hi={say_hi} no={1} />
+     <ErrorBoundary> <Counter say_hi={say_hi} no={1} /></ErrorBoundary>
       <Counter say_hi={say_hi} no={2} />
       <Counter say_hi={say_hi} no={3} />
       <hr />
       {todoShow && <ToDo />}
       <button onClick={() => setTodoShow(!todoShow)}>Toggle</button>
       <hr />
-      <TodoClass test={10}>new child</TodoClass>
+      <ErrorBoundary><TodoClass test={10}>new child</TodoClass></ErrorBoundary>
       {/* {show ? <p className="test">TEst data</p> : null} */}
       {show && <p className="test">TEst data</p>}
       <button onClick={() => setShow(!show)}>Toggle</button>
