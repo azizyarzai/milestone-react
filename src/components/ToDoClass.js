@@ -8,7 +8,7 @@ class TodoClass extends PureComponent {
       input: "",
       todos: [],
       val: 0,
-      users: [],
+      users: null,
     };
 
     console.log("Constrator Called");
@@ -52,7 +52,9 @@ class TodoClass extends PureComponent {
   componentDidMount() {
     fetch("https://api.githu.com/users")
       .then((res) => res.json())
-      .then((data) => this.setState({ ...this.state, users: data }))
+      .then((data) => this.setState({ ...this.state, users: data })).catch(err => {
+        throw new Error("Can't load")
+      })
     
     // const no = Math.ceil(Math.random() * 1000)
     // if (no > 100){
