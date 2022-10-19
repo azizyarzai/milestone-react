@@ -9,12 +9,18 @@ import PropType from "./components/PropType";
 import ErrorBoundary from "./components/ErrorBoundary";
 import userEvent from "@testing-library/user-event";
 
+export const authContext = React.createContext();
+
 function App() {
   let [test, setTest] = useState(12);
   const [show, setShow] = useState(false);
   const [todoShow, setTodoShow] = useState(true);
   const [value, setValue] = useState(15);
-  const [user, setUser] = useState({id: 3, name: 'Amin', email: 'test@gmail.com'})
+  const [user, setUser] = useState({
+    id: 3,
+    name: "Amin",
+    email: "test@gmail.com",
+  });
 
   // useEffect(() => {
   //   setTest(15);
@@ -26,33 +32,40 @@ function App() {
   };
   console.log("App js rendered");
   return (
-    <div style={{ marginLeft: "5rem" }}>
-      <p>user: {user.name}</p>
-      <PropType title="Test title" onClick={() => alert("Clicked")} />
-      <Sample value={value} />
-      <button
-        onClick={() => {
-          // setValue(value + 15)
-          setShow(!show);
-        }}
-        on
-      >
-        Change Value
-      </button>
-      <p>{test}</p>
-     <ErrorBoundary> <Counter say_hi={say_hi} no={1} user={user} onChangeUser={setUser} /></ErrorBoundary>
-      {/* <Counter say_hi={say_hi} no={2} />
+    <authContext.Provider value={{ user, setUser }}>
+      user = {user.name}
+      <div style={{ marginLeft: "5rem" }}>
+        <p>user: {user.name}</p>
+        <PropType title="Test title" onClick={() => alert("Clicked")} />
+        <Sample value={value} />
+        <button
+          onClick={() => {
+            // setValue(value + 15)
+            setShow(!show);
+          }}
+          on
+        >
+          Change Value
+        </button>
+        <p>{test}</p>
+        <ErrorBoundary>
+          <Counter say_hi={say_hi} no={1} />
+        </ErrorBoundary>
+        {/* <Counter say_hi={say_hi} no={2} />
       <Counter say_hi={say_hi} no={3} /> */}
-      <hr />
-      {todoShow && <ToDo />}
-      <button onClick={() => setTodoShow(!todoShow)}>Toggle</button>
-      <hr />
-      <ErrorBoundary><TodoClass  test={10}>new child</TodoClass></ErrorBoundary>
-      {/* {show ? <p className="test">TEst data</p> : null} */}
-      {show && <p className="test">TEst data</p>}
-      <button onClick={() => setShow(!show)}>Toggle</button>
-      <p className="active">Active from todo</p>
-    </div>
+        <hr />
+        {todoShow && <ToDo />}
+        <button onClick={() => setTodoShow(!todoShow)}>Toggle</button>
+        <hr />
+        <ErrorBoundary>
+          <TodoClass test={10}>new child</TodoClass>
+        </ErrorBoundary>
+        {/* {show ? <p className="test">TEst data</p> : null} */}
+        {show && <p className="test">TEst data</p>}
+        <button onClick={() => setShow(!show)}>Toggle</button>
+        <p className="active">Active from todo</p>
+      </div>
+    </authContext.Provider>
   );
 }
 

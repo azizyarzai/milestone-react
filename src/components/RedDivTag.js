@@ -1,17 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useContext, useEffect } from "react";
 
-const RedDivTag = ({value, user, onChangeUser}) => {
+import { authContext } from "../App";
 
-    useEffect(() => {
-        onChangeUser({id: 12, name: 'Karim', email: 'karim@gmail.com'})
-    }, [])
+const RedDivTag = ({ value }) => {
+  const { user, setUser } = useContext(authContext);
+
+  useEffect(() => {
+    setUser({ id: 12, name: "Naveed", email: "karim@gmail.com" });
+  }, []);
   return (
-    <div><p>
-        user : {user.name}
-        </p>
-        <p>value : {value}</p>
-        </div>
-  )
-}
+    <div>
+      <p>user : {user.name}</p>
+      <p>value : {value}</p>
+    </div>
+  );
+};
 
-export default RedDivTag
+export default RedDivTag;

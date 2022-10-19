@@ -1,14 +1,17 @@
 import React, { Component, PureComponent } from "react";
+// import { authContext } from "../App";
 import withDate from "../hoc/withDate";
 
 class TodoClass extends PureComponent {
+  // static contextType = authContext;
+
   constructor() {
     super();
     this.state = {
       input: "",
       todos: [],
       val: 0,
-      users: null,
+      users: [],
     };
 
     console.log("Constrator Called");
@@ -49,21 +52,27 @@ class TodoClass extends PureComponent {
     return new_state;
   }
 
-  componentDidMount() {
-    fetch("https://api.githu.com/users")
-      .then((res) => res.json())
-      .then((data) => this.setState({ ...this.state, users: data })).catch(err => {
-        throw new Error("Can't load")
-      })
-    
+  async componentDidMount() {
+    try {
+      const res = await fetch("https://api.githu.com/users");
+      console.log(await res.json());
+    } catch (error) {
+      console.log("Failed");
+    }
+    // .then((res) => res.json())
+    // .then((data) => this.setState({ ...this.state, users: data }))
+    // .catch((err) => {
+    //   throw new Error("Can't load");
+    // });
+
     // const no = Math.ceil(Math.random() * 1000)
     // if (no > 100){
     //   throw new Error("dsfjsh")
     // }
 
-    const arr = [1,2]
+    const arr = [1, 2];
 
-    const b = arr[20]
+    const b = arr[20];
 
     console.log("B", b);
   }
@@ -77,17 +86,17 @@ class TodoClass extends PureComponent {
 
   // componentWillUnmount
 
-  getSnapshotBeforeUpdate(prevProps, prevState){
+  getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log("getSnapshotBeforeUpdate called");
-    return 5
+    return 5;
   }
 
-  componentDidUpdate(prevProps, prevState,value){
+  componentDidUpdate(prevProps, prevState, value) {
     console.log(`componentDidUpdate claaed with ${value}`);
   }
 
   render() {
-    // console.log(this.props)
+    // console.log(this.context);
     return (
       <div>
         <h1>To Do List Class Based</h1>
@@ -138,4 +147,6 @@ class TodoClass extends PureComponent {
   }
 }
 
-export default withDate(TodoClass);
+// TodoClass.contextType = authContext;
+
+export default TodoClass;
