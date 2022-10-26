@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Input, Button, InputNumber } from "antd";
-import axios from "axios";
+import { Input, Button, InputNumber, Segmented } from "antd";
+import firebase from "../clients/firebase";
 
 const url = "/books.json";
 
@@ -11,35 +11,37 @@ const AddBook = () => {
   const [pages, setPages] = useState();
   const [formSubmited, setFormSubmited] = useState(true);
   const [books, setBooks] = useState([]);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     if (formSubmited)
-      axios
+      firebase
         .get(url)
         .then((res) => {
           console.log(res);
-          let formated_data = [];
-          Object.entries(res.data).forEach((d) => {
-            let obj = { id: d[0], ...d[1] };
-            formated_data.push(obj);
-          });
-          setBooks(formated_data);
+          setBooks(res.data);
         })
         .catch((err) => console.log(err));
   }, [formSubmited]);
 
-  console.log(books);
+  const delteBook = (id) => {
+    firebase
+      .delete(`/books.json`)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err));
+  };
 
   const submitForm = (e) => {
     e.preventDefault();
+    setError(null);
     setFormSubmited(false);
     const data = { title, author, price, pages };
-    axios
+    firebase
       .post(url, data)
       .then((res) => {
         setFormSubmited(true);
-        setTitle("");
         console.log(res);
+        setTitle("");
         setAuthor("");
         setBooks("");
         setPages("");
@@ -47,7 +49,7 @@ const AddBook = () => {
       })
       .catch((err) => {
         setFormSubmited(false);
-        console.log(err);
+        setError(err.message);
       });
   };
   return (
@@ -92,6 +94,7 @@ const AddBook = () => {
           Add Book
         </Button>
       </form>
+      {error && <p>ERROR: {error}</p>}
       {books.length > 0 ? (
         <div
           style={{
@@ -103,6 +106,7 @@ const AddBook = () => {
         >
           {books.map((book) => (
             <div
+              key={book.id}
               style={{ border: "1px solid green", width: 250, margin: "1rem" }}
             >
               <p>id : {book.id}</p>
@@ -110,6 +114,9 @@ const AddBook = () => {
               <p>Author: {book.author}</p>
               <p>Price: {book.price}AFN</p>
               <p>Pages: {book.pages}</p>
+              <Button type="primary" onClick={() => delteBook(book.id)}>
+                Delete
+              </Button>
             </div>
           ))}
         </div>

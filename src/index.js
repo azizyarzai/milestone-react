@@ -6,7 +6,24 @@ import reportWebVitals from "./reportWebVitals";
 import "antd/dist/antd.css";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://milestone-9ebad-default-rtdb.firebaseio.com";
+// axios.defaults.baseURL = "https://milestone-9ebad-default-rtdb.firebaseio.com";
+axios.defaults.headers.authorization = "test 1";
+
+axios.interceptors.request.use((config) => {
+  console.log(config);
+  // config.headers.authorization = "test";
+  return config;
+});
+
+axios.interceptors.response.use((response) => {
+  let formated_data = [];
+  Object.entries(response.data).forEach((d) => {
+    let obj = { id: d[0], ...d[1] };
+    formated_data.push(obj);
+  });
+  response.data = formated_data;
+  return response;
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
