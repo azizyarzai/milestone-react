@@ -1,25 +1,22 @@
 import React, { useEffect, useState, useRef } from "react";
-import withDate from "../hoc/withDate";
-import RedDivTag from "./RedDivTag";
+
 
 const Counter = ({ no, say_hi }) => {
   const [counter, setCounter] = useState(1);
   const increment = () => setCounter(counter + 1);
   const decrement = () => setCounter(counter - 1);
   const [user, setUser] = useState(null);
-  // console.log(12);
 
-  const divRef = useRef();
 
   const new_func = () => {
     say_hi(no);
   };
 
-  useEffect(() => {
-    if (counter === 5) {
-      throw new Error("Error occured");
-    }
-  }, [counter]);
+  // useEffect(() => {
+  //   if (counter === 5) {
+  //     throw new Error("Error occured");
+  //   }
+  // }, [counter]);
 
   useEffect(() => {
     // let c = document.querySelectorAll('.test')[1]
@@ -40,11 +37,10 @@ const Counter = ({ no, say_hi }) => {
 
   return (
     <div>
-      {/* <p>user = {user.email }</p> */}
-      {/* <div ref={divRef} className="test">{counter}</div> */}
-      <RedDivTag value={counter} />
+
       <div>
-        {user && <img src={user.avatar_url} width={150} height={150} />}
+        {/* {user && <img src={user.avatar_url} width={150} height={150} />} */}
+        <span>{counter}</span>
         <button onClick={increment}>Increment</button>
         <button onClick={decrement}>Decrement</button>
         <button onClick={new_func}>Test</button>

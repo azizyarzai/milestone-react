@@ -1,11 +1,14 @@
-import axios from "axios";
-import { useEffect } from "react";
-import AddBook from "./components/AddBook";
+import AddBook from "./pages/AddBook";
+import Books from "./pages/Books";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <div style={{ marginLeft: "250px" }}>
-      <AddBook />
+      <Routes>
+        <Route path="/" element={<Books />} />
+        <Route path="/add-book" element={<AddBook />} />
+      </Routes>
     </div>
   );
 }
