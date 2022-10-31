@@ -6,8 +6,10 @@ function App() {
   return (
     <div style={{ marginLeft: "250px" }}>
       <Routes>
-        <Route path="/" element={<Books />} />
-        <Route path="/add-book" element={<AddBook />} />
+        <Route path="/api">
+          <Route path=":id/:name" element={<Books />} />
+          <Route path="add-book/*" element={<AddBook />} />
+        </Route>
       </Routes>
     </div>
   );

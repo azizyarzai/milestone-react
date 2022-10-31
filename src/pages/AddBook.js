@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Input, Button, InputNumber, Segmented } from "antd";
 import firebase from "../clients/firebase";
 import Counter from "../components/Counter";
+import { Link, Route, Routes, useLocation } from "react-router-dom";
 
 const url = "/books.json";
 
@@ -11,6 +12,7 @@ const AddBook = () => {
   const [price, setPrice] = useState();
   const [pages, setPages] = useState();
   const [error, setError] = useState(null);
+  const location = useLocation();
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -29,10 +31,20 @@ const AddBook = () => {
         setError(err.message);
       });
   };
+  console.log(location.pathname);
   return (
     <div>
       <h3>Add Book</h3>
-      <a href="/test">Go To Test</a>
+      <Link to="/api/45/amin">Go Back</Link>
+      <div>
+        <Routes>
+          <Route
+            path={`${location.pathname}/test`}
+            element={<h1>Test Element</h1>}
+          />
+          <Route path="/api/add-book/new" element={<h1>NEw Element</h1>} />
+        </Routes>
+      </div>
       <Counter />
       <form style={{ width: 350 }} onSubmit={submitForm}>
         <div>

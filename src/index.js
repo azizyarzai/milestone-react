@@ -5,7 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import "antd/dist/antd.css";
 import axios from "axios";
-import {BrowserRouter} from 'react-router-dom'
+import { BrowserRouter } from "react-router-dom";
 
 // axios.defaults.baseURL = "https://milestone-9ebad-default-rtdb.firebaseio.com";
 axios.defaults.headers.authorization = "test 1";
@@ -30,7 +30,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <App />
+      <App />
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../clients/firebase";
 import { Button } from "antd";
+import { useParams, Link } from "react-router-dom";
 
 const Books = () => {
   const [books, setBooks] = useState(null);
+  const { id, name } = useParams();
+  console.log({ id, name });
   useEffect(() => {
     firebase
       .get("/books.json")
@@ -22,6 +25,7 @@ const Books = () => {
   };
   return (
     <div>
+      <Link to="/api/add-book">Add Book</Link>
       {books ? (
         <div
           style={{
