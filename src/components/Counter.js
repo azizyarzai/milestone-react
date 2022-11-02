@@ -1,12 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 
-
-const Counter = ({ no, say_hi }) => {
+const Counter = ({ no, say_hi, ...props }) => {
   const [counter, setCounter] = useState(1);
   const increment = () => setCounter(counter + 1);
   const decrement = () => setCounter(counter - 1);
   const [user, setUser] = useState(null);
 
+  console.log(props);
 
   const new_func = () => {
     say_hi(no);
@@ -37,7 +37,6 @@ const Counter = ({ no, say_hi }) => {
 
   return (
     <div>
-
       <div>
         {/* {user && <img src={user.avatar_url} width={150} height={150} />} */}
         <span>{counter}</span>

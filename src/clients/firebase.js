@@ -18,7 +18,7 @@ instance.interceptors.response.use((response) => {
 });
 
 instance.interceptors.request.use((config) => {
-  console.log(config);
+  // console.log(config);
   // config.headers.authorization = "test";
   return config;
 });

@@ -2,7 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Input, Button, InputNumber, Segmented } from "antd";
 import firebase from "../clients/firebase";
 import Counter from "../components/Counter";
-import { Link, Route, Routes, useLocation } from "react-router-dom";
+import {
+  Link,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 
 const url = "/books.json";
 
@@ -32,9 +38,13 @@ const AddBook = () => {
       });
   };
   console.log(location.pathname);
+  const navigate = useNavigate();
   return (
     <div>
       <h3>Add Book</h3>
+      <Button type="primary" onClick={() => navigate(-1)}>
+        Go Back
+      </Button>
       <Link to="/api/45/amin">Go Back</Link>
       <div>
         <Routes>

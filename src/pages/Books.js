@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import firebase from "../clients/firebase";
 import { Button } from "antd";
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, redirect, useNavigate } from "react-router-dom";
 
 const Books = () => {
   const [books, setBooks] = useState(null);
@@ -11,7 +11,7 @@ const Books = () => {
     firebase
       .get("/books.json")
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setBooks(res.data);
       })
       .catch((err) => console.log(err));
@@ -23,8 +23,20 @@ const Books = () => {
       .then((res) => console.log(res))
       .catch((err) => console.log(err));
   };
+
+  const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     console.log("Timeout called");
+  //     return navigate("/api/add-book");
+  //   }, 5000);
+  // }, []);
   return (
     <div>
+      <Button type="primary" onClick={() => navigate(-1)}>
+        Go Back
+      </Button>
       <Link to="/api/add-book">Add Book</Link>
       {books ? (
         <div
