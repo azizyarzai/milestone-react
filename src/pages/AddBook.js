@@ -4,10 +4,12 @@ import firebase from "../clients/firebase";
 import Counter from "../components/Counter";
 import {
   Link,
+  Navigate,
   Route,
   Routes,
   useLocation,
   useNavigate,
+  useNavigation,
 } from "react-router-dom";
 
 const url = "/books.json";
@@ -19,6 +21,9 @@ const AddBook = () => {
   const [pages, setPages] = useState();
   const [error, setError] = useState(null);
   const location = useLocation();
+
+  const res = useNavigation();
+  console.log(location);
 
   const submitForm = (e) => {
     e.preventDefault();
@@ -37,8 +42,12 @@ const AddBook = () => {
         setError(err.message);
       });
   };
-  console.log(location.pathname);
+  // console.log(location.pathname);
   const navigate = useNavigate();
+
+  const [user, setUser] = useState("");
+  // if (!user) return <Navigate to="/api/books" />;
+  // if (!user) return navigate("/api/books");
   return (
     <div>
       <h3>Add Book</h3>
@@ -48,11 +57,8 @@ const AddBook = () => {
       <Link to="/api/45/amin">Go Back</Link>
       <div>
         <Routes>
-          <Route
-            path={`${location.pathname}/test`}
-            element={<h1>Test Element</h1>}
-          />
-          <Route path="/api/add-book/new" element={<h1>NEw Element</h1>} />
+          <Route path="test" element={<h1>Test Element</h1>} />
+          <Route path="new" element={<h1>NEw Element</h1>} />
         </Routes>
       </div>
       <Counter />

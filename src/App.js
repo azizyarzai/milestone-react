@@ -1,18 +1,37 @@
 import AddBook from "./pages/AddBook";
 import Books from "./pages/Books";
-import { Route, Routes } from "react-router-dom";
+import {
+  Route,
+  Routes,
+  Outlet,
+  createBrowserRouter,
+  createRoutesFromElements,
+  RouterProvider,
+} from "react-router-dom";
 import Counter from "./components/Counter";
 
 function App() {
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route
+        path="api"
+        element={
+          <div>
+            <h1>Parent Comp</h1>
+            <Outlet />
+          </div>
+        }
+      >
+        {/* <Route path=":id/:name" element={<Books />} /> */}
+        <Route path="books" element={<Books />} />
+        <Route path="add-book/*" element={<AddBook />} />
+        <Route path="*" element={<h1>404 Not Found</h1>} />
+      </Route>
+    )
+  );
   return (
     <div style={{ marginLeft: "250px" }}>
-      <Routes>
-        <Route path="api">
-          {/* <Route path=":id/:name" element={<Books />} /> */}
-          <Route path="books" element={<Books />} />
-          <Route path="add-book/*" element={<AddBook />} />
-        </Route>
-      </Routes>
+      <RouterProvider router={router} />
     </div>
   );
 }
