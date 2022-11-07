@@ -8,9 +8,12 @@ import {
   createRoutesFromElements,
   RouterProvider,
 } from "react-router-dom";
-import Counter from "./components/Counter";
+import { useState } from "react";
 
 function App() {
+  // if (true) {
+  //   const [test, setTest] = useState();
+  // }
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route

@@ -1,12 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import firebase from "../clients/firebase";
 import { Button } from "antd";
 import { useParams, Link, redirect, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const Books = () => {
   const [books, setBooks] = useState(null);
   const { id, name } = useParams();
   console.log({ id, name });
+
+  // const test = () => {
+  //   console.log("test");
+  // };
+
+  const test = useCallback(() => {
+    console.log("TEst");
+  }, []);
   useEffect(() => {
     firebase
       .get("/books.json")
@@ -32,6 +41,14 @@ const Books = () => {
   //     return navigate("/api/add-book");
   //   }, 5000);
   // }, []);
+
+  const [products, setProduct] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/products/viewset")
+      .then((res) => setProduct(res.data));
+  }, []);
   return (
     <div>
       <Button type="primary" onClick={() => navigate(-1)}>
@@ -66,6 +83,19 @@ const Books = () => {
       ) : (
         <p>No Books Available</p>
       )}
+
+      <div>
+        {products.map((p) => (
+          <div>
+            <ul>
+              <li>Id - {p.id}</li>
+              <li>Name - {p.name}</li>
+              <li>Price - {p.price}</li>
+              <li>Category - {p.category}</li>
+            </ul>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
