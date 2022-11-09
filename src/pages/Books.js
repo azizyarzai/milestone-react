@@ -1,13 +1,53 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useReducer } from "react";
 import firebase from "../clients/firebase";
 import { Button } from "antd";
 import { useParams, Link, redirect, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const productReducer = (state, action) => {
+  switch (action.type) {
+    case "requestInit":
+      return {
+        ...state,
+        book: [],
+        loading: true,
+        error: null,
+      };
+
+    case "reqSuccess":
+      return {
+        ...state,
+        loading: false,
+        books: action.data,
+      };
+
+    case "reqFailed":
+      return {
+        ...state,
+        loading: false,
+        error: action.payload,
+      };
+    default:
+      return state;
+  }
+};
+
 const Books = () => {
-  const [books, setBooks] = useState(null);
+  // const [books, setBooks] = useState(null);
+  // const [loading, setLoading] = useState(false);
+  // const [error, setError] = useState(null);
+
+  const [state, dispatch] = useReducer(productReducer, {
+    books: [],
+    laoding: false,
+    error: null,
+  });
+
+  const { books, loading, error } = state;
+
+  console.log(state);
   const { id, name } = useParams();
-  console.log({ id, name });
+  // console.log({ id, name });
 
   // const test = () => {
   //   console.log("test");
@@ -17,13 +57,25 @@ const Books = () => {
     console.log("TEst");
   }, []);
   useEffect(() => {
+    // setLoading(true);
+    // setError(null);
+    // setBooks([]);
+    dispatch({ type: "requestInit" });
     firebase
       .get("/books.json")
       .then((res) => {
-        // console.log(res);
-        setBooks(res.data);
+        // setLoading(false);
+        // // console.log(res);
+        // setBooks(res.data);
+
+        dispatch({ type: "reqSuccess", data: res.data });
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        // setLoading(false);
+        // setError(err.message);
+        // console.log(err);
+        dispatch({ type: "reqFailed", payload: err.message });
+      });
   }, []);
 
   const deleteBook = (id) => {
@@ -44,17 +96,19 @@ const Books = () => {
 
   const [products, setProduct] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get("http://127.0.0.1:8000/api/products/viewset")
-      .then((res) => setProduct(res.data));
-  }, []);
+  // useEffect(() => {
+  //   axios
+  //     .get("http://127.0.0.1:8000/api/products/viewset")
+  //     .then((res) => setProduct(res.data));
+  // }, []);
   return (
     <div>
       <Button type="primary" onClick={() => navigate(-1)}>
         Go Back
       </Button>
       <Link to="/api/add-book">Add Book</Link>
+      <p style={{ color: "red" }}>{error}</p>
+      <p>{loading && "loading .... "}</p>
       {books ? (
         <div
           style={{
@@ -84,7 +138,7 @@ const Books = () => {
         <p>No Books Available</p>
       )}
 
-      <div>
+      {/* <div>
         {products.map((p) => (
           <div>
             <ul>
@@ -95,7 +149,7 @@ const Books = () => {
             </ul>
           </div>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };
