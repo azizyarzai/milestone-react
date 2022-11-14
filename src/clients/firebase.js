@@ -9,12 +9,15 @@ const instance = axios.create({
 
 instance.interceptors.response.use((response) => {
   let formated_data = [];
-  console.log(response);
-  Object.entries(response.data).forEach((d) => {
-    let obj = { id: d[0], ...d[1] };
-    formated_data.push(obj);
-  });
-  response.data = formated_data;
+  console.log(response.data);
+
+  if (Object.keys(response.data).length > 0) {
+    Object.entries(response.data).forEach((d) => {
+      let obj = { id: d[0], ...d[1] };
+      formated_data.push(obj);
+    });
+    response.data = formated_data;
+  }
   return response;
 });
 
